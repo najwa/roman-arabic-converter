@@ -32,16 +32,17 @@ class Converter
 
   def decimal_to_roman
     remaining_to_convert = numeral
-    roman_numeral = ""
-    DECIMAL_TO_ROMAN.each_with_index do |conversion_information, index|
+
+    DECIMAL_TO_ROMAN.reduce('') do |converted_number, conversion_information|
       decimal = conversion_information[0]
       roman = conversion_information[1]
 
       consecutive_letters = remaining_to_convert / decimal
-      roman_numeral += roman * consecutive_letters
+
+      converted_number += roman * consecutive_letters
       remaining_to_convert = remaining_to_convert % decimal
+      converted_number
     end
-    roman_numeral
   end
 
   def roman_to_decimal
